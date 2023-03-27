@@ -1,7 +1,7 @@
 import './css/styles.css';
 import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { fetchCountries } from './fetchCountries.js';
+import { fetchCountries } from './fetchCountries';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -9,7 +9,7 @@ const searchRef = document.querySelector('#search-box');
 const countryInfo = document.querySelector('.country-info');
 const countryList = document.querySelector('.country-list');
 
-const cleanMarkup = ref => (ref.innerHtml = '');
+const cleanMarkup = ref => (ref.innerHTML = '');
 
 const inputHandler = e => {
     const textInput = e.target.value.trim();
@@ -21,8 +21,7 @@ const inputHandler = e => {
     }
 
     fetchCountries(textInput)
-    .then(data => {
-        console.log(data);
+    .then(data => {        
         if (data.length > 10) {
             Notify.info(
                 'Too many matches found. Please enter a more specific name'
